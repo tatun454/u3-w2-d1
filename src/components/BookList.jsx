@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SingleBook from "./SingleBook";
+import CommentArea from "./CommentArea";
 
 const BookList = ({ books }) => {
   const [search, setSearch] = useState("");
@@ -32,15 +33,31 @@ const BookList = ({ books }) => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <div className="d-flex flex-wrap justify-content-center gap-3 w-100">
-        {filteredBooks.map((book) => (
-          <SingleBook
-            key={book.asin}
-            book={book}
-            selected={selectedBookAsin === book.asin}
-            onSelect={() => handleSelect(book.asin)}
-          />
-        ))}
+      <div className="d-flex" style={{ gap: "1rem" }}>
+        <div
+          className="d-flex flex-wrap justify-content-center gap-3"
+          style={{ flex: 1, maxHeight: "90vh", overflowY: "auto" }}
+        >
+          {filteredBooks.map((book) => (
+            <SingleBook
+              key={book.asin}
+              book={book}
+              selected={selectedBookAsin === book.asin}
+              onSelect={() => handleSelect(book.asin)}
+            />
+          ))}
+        </div>
+        <div
+          style={{
+            flexBasis: "400px",
+            borderLeft: "1px solid #ccc",
+            paddingLeft: "1rem",
+            maxHeight: "90vh",
+            overflowY: "auto",
+          }}
+        >
+          <CommentArea bookAsin={selectedBookAsin} />
+        </div>
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ const CommentArea = ({ bookAsin }) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (bookAsin) {
       fetchComments();
     }
@@ -47,6 +47,10 @@ const CommentArea = ({ bookAsin }) => {
   const deleteComment = () => {
     fetchComments();
   };
+
+  if (!bookAsin) {
+    return <div>Please select a book to see comments.</div>;
+  }
 
   if (loading) return <Loading />;
   if (error) return <Error message={error} />;
